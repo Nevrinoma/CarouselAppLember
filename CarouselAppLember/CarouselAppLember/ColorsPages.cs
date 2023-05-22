@@ -1,21 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 using Xamarin.Forms;
 
-namespace CarouselApp
+namespace CarouselAppLember
 {
-    public partial class MainPage : CarouselPage
+    public class ColorsPages : CarouselPage
     {
-        public MainPage()
+        public ColorsPages()
         {
+            var colorDictionary = new Dictionary<string, Color>
+            {
+                { "Red", Color.Red},
+                { "Blue", Color.Blue},
+                { "Green", Color.Green},
+                { "Yellow", Color.Yellow}
+            };
 
-            string[] colors = { "Red", "Blue", "Green", "Yellow" };
-
-            for (int i = 0; i < colors.Length; i++)
+            foreach (var color in colorDictionary)
             {
                 var contentPage = new ContentPage
                 {
@@ -25,17 +29,27 @@ namespace CarouselApp
                         {
                             new Label
                             {
-                                Text= colors[i],
+                                Text= color.Key,
                                 FontSize= Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                                 HorizontalOptions= LayoutOptions.Center
                             },
                             new BoxView
                             {
-                                Color= Color.FromHex(colors[i]),
+                                Color= color.Value,
                                 WidthRequest= 200,
                                 HeightRequest= 200,
                                 HorizontalOptions= LayoutOptions.Center,
                                 VerticalOptions= LayoutOptions.CenterAndExpand
+                            },
+                            new Button
+                            {
+                                Text = "Tagasi",
+                                HorizontalOptions = LayoutOptions.Center,
+                                VerticalOptions = LayoutOptions.End,
+                                Command = new Command(async () =>
+                                {
+                                    await Navigation.PushModalAsync(new MainPage());
+                                })
                             }
                         }
                     }
