@@ -13,6 +13,8 @@ namespace CarouselAppLember
         List<string> tekstid = new List<string>() { "Colors" };
         Entry colorEntry;
         ColorsPages colorsPages;
+        ColorsPages clrsnames = new ColorsPages();
+        Label clrs = new Label();
 
         public MainPage()
         {
@@ -39,8 +41,14 @@ namespace CarouselAppLember
             };
             addButton.Clicked += AddButton_Clicked;
 
+            
+            
+              
+
+
             st1.Children.Add(colorEntry);
             st1.Children.Add(addButton);
+            st1.Children.Add(clrs);
 
             for (int i = 0; i < ContentPages.Count; i++)
             {
@@ -61,6 +69,15 @@ namespace CarouselAppLember
 
         private void AddButton_Clicked(object sender, EventArgs e)
         {
+
+            clrs.Text = "Colors:";
+            clrs.HeightRequest = 200;
+            clrs.WidthRequest= 200;
+            foreach (var item in clrsnames.сolorDictionary)
+            {
+                clrs.Text += item.Key.ToString();
+            }
+
             string colorName = colorEntry.Text;
             if (!string.IsNullOrEmpty(colorName))
             {
@@ -74,6 +91,9 @@ namespace CarouselAppLember
             Button b = (Button)sender;
             await Navigation.PushModalAsync(ContentPages[b.TabIndex]);
         }
+
+        
+
     }
 
 }

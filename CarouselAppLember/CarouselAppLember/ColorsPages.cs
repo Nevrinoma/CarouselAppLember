@@ -2,50 +2,54 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.ComponentModel;
 using Xamarin.Forms;
+using System.Security.Cryptography.X509Certificates;
+
 
 namespace CarouselAppLember
 {
     public class ColorsPages : CarouselPage
     {
-        private Dictionary<string, Color> colorDictionary;
+        public Dictionary<string, Color> сolorDictionary { get; set; }
         private StackLayout colorsLayout;
 
         public ColorsPages()
         {
-            colorDictionary = new Dictionary<string, Color>
-        {
+            сolorDictionary = new Dictionary<string, Color>
+            {
             { "Red", Color.Red },
             { "Blue", Color.Blue },
             { "Green", Color.Green },
             { "Yellow", Color.Yellow }
-        };
+            };
 
             colorsLayout = new StackLayout();
 
-            RefreshColors(contentView);
+            RefreshColors();
 
             Children.Add(new ContentPage
             {
                 Content = colorsLayout
             });
+
+            
         }
 
         public void AddColor(string colorName)
         {
-            if (!colorDictionary.ContainsKey(colorName))
+            if (!сolorDictionary.ContainsKey(colorName))
             {
-                colorDictionary.Add(colorName, GetRandomColor());
-                RefreshColors(contentView);
+                сolorDictionary.Add(colorName, System.Drawing.Color.FromName(colorName));
+                RefreshColors();
             }
         }
 
-        private void RefreshColors(ContentView contentView)
+        private void RefreshColors()
         {
             colorsLayout.Children.Clear();
 
-            foreach (var color in colorDictionary)
+            foreach (var color in сolorDictionary)
             {
                 var contentView = new ContentView
                 {
@@ -81,9 +85,13 @@ namespace CarouselAppLember
                     }
                 };
 
-                Children.Add(contentView);
+                Children.Add(new ContentPage
+                {
+                    Content = contentView
+                });
             }
         }
+        
 
         private Color GetRandomColor()
         {
@@ -91,6 +99,4 @@ namespace CarouselAppLember
             return Color.FromRgb(random.Next(256), random.Next(256), random.Next(256));
         }
     }
-
-
 }
