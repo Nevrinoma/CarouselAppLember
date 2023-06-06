@@ -75,7 +75,7 @@ namespace CarouselAppLember
             clrs.WidthRequest= 200;
             foreach (var item in clrsnames.сolorDictionary)
             {
-                clrs.Text += item.Key.ToString();
+                clrs.Text += item.Key.ToString()+" ";
             }
 
             string colorName = colorEntry.Text;

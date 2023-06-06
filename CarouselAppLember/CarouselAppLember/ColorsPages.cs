@@ -47,7 +47,7 @@ namespace CarouselAppLember
 
         private void RefreshColors()
         {
-            colorsLayout.Children.Clear();
+            
 
             foreach (var color in сolorDictionary)
             {
