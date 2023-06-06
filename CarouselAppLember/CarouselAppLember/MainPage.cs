@@ -40,12 +40,6 @@ namespace CarouselAppLember
                 TextColor = Color.Black
             };
             addButton.Clicked += AddButton_Clicked;
-
-            
-            
-              
-
-
             st1.Children.Add(colorEntry);
             st1.Children.Add(addButton);
             st1.Children.Add(clrs);
@@ -65,35 +59,38 @@ namespace CarouselAppLember
             Content = st1;
 
             colorsPages = (ColorsPages)ContentPages[0];
+            
         }
 
         private void AddButton_Clicked(object sender, EventArgs e)
         {
-
-            clrs.Text = "Colors:";
-            clrs.HeightRequest = 200;
-            clrs.WidthRequest= 200;
-            foreach (var item in clrsnames.сolorDictionary)
-            {
-                clrs.Text += item.Key.ToString()+" ";
-            }
-
             string colorName = colorEntry.Text;
             if (!string.IsNullOrEmpty(colorName))
             {
                 colorsPages.AddColor(colorName);
                 colorEntry.Text = string.Empty;
+                showCLRS(); 
             }
         }
+
+
+        private void showCLRS()
+        {
+            clrs.Text = "Colors:";
+            clrs.HeightRequest = 200;
+            clrs.WidthRequest = 200;
+            foreach (var item in colorsPages.сolorDictionary)
+            {
+                clrs.Text += item.Key.ToString() + " ";
+            }
+        }
+
 
         private async void Navig_funktsion(object sender, EventArgs e)
         {
             Button b = (Button)sender;
             await Navigation.PushModalAsync(ContentPages[b.TabIndex]);
         }
-
-        
-
     }
 
 }

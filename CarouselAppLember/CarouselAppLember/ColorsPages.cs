@@ -32,8 +32,6 @@ namespace CarouselAppLember
             {
                 Content = colorsLayout
             });
-
-            
         }
 
         public void AddColor(string colorName)
@@ -47,7 +45,7 @@ namespace CarouselAppLember
 
         private void RefreshColors()
         {
-            
+            Children.Clear();
 
             foreach (var color in сolorDictionary)
             {
@@ -91,7 +89,6 @@ namespace CarouselAppLember
                 });
             }
         }
-        
 
         private Color GetRandomColor()
         {
